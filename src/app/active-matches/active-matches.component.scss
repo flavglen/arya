@@ -1,0 +1,21 @@
+.main {
+    width: 30vw;
+    height: auto;
+    background-image: linear-gradient(to bottom right, #0d47a1, black);
+    ;
+    margin: auto;
+    position: relative;
+    top: 15vh;
+    padding: 2vw;
+    color: white;
+    border-radius:10px;
+}
+
+.table{
+    display: flex;
+    justify-content: space-between;
+}
+
+.no-margin{
+    margin:0 !important;
+}
