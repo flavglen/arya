@@ -6,14 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-score.component.scss']
 })
 export class ViewScoreComponent implements OnInit {
-
+  teamsData:any[]= [];
   constructor() { }
 
   ngOnInit(): void {
     const g = localStorage.getItem('score');
     if(g){
-     let x =  this.generateScoreBoard(JSON.parse(g));
-     console.log(x)
+     this.teamsData =  this.generateScoreBoard(JSON.parse(g));
     }
   }
 
@@ -21,7 +20,7 @@ export class ViewScoreComponent implements OnInit {
   generateScoreBoard(teams:any){
     return Object.keys(teams).map(team=>{
       if(team && team.length > 1){
-        return teams[team].myFormArray;
+        return teams[team];
       }
       return null;
     }).filter(x=> x);

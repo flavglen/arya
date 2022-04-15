@@ -13,6 +13,7 @@ import { DynamicFormsPrimeNGUIModule } from '@ng-dynamic-forms/ui-primeng';
 import { UpdateScoreComponent } from './update-score/update-score.component';
 import { ViewScoreComponent } from './view-score/view-score.component';
 import { ActiveMatchesComponent } from './active-matches/active-matches.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ActiveMatchesComponent } from './active-matches/active-matches.componen
     AppRoutingModule,
     DynamicFormsMaterialUIModule,
     ReactiveFormsModule,
-    DynamicFormsPrimeNGUIModule
+    DynamicFormsPrimeNGUIModule,
+    MatGridListModule
     
   ],
   providers: [],
