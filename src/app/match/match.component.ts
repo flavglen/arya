@@ -70,6 +70,7 @@ export class MatchComponent implements OnInit {
     this.teams[this.currentTeam] = this.formGroup.value;
     this.teamsModel[this.currentTeam] = json;
     localStorage.setItem('forms', JSON.stringify(this.teamsModel));
+    localStorage.setItem('score', JSON.stringify(this.teams));
     this.formGroup.reset();
   }
   restoreForm() {

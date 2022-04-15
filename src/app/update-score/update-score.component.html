@@ -1,6 +1,8 @@
 <form>
 
-    <dynamic-material-form [group]="formGroup" [model]="formModel"> 
+    <dynamic-material-form (change)="onChange($event)" [group]="formGroup" [model]="formModel"> 
     </dynamic-material-form>
     
 </form>
+
+<button type="button" (click)="updateScore()">store</button>
