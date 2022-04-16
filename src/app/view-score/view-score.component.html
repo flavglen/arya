@@ -10,108 +10,20 @@
                         <tr class="head">
                             <th>Player</th>
                             <th>Runs</th>
-                            <th>balls</th>
                             <th>6's</th>
                             <th>4's</th>
                             <th>S/R rate</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Player1</td>
-                            <td>140</td>
-                            <td>113</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
+                        <tr *ngFor="let score of team.myFormArray;let i=index">
+                            <td>{{score['Player'+ (i+1)]}}</td>
+                            <td>{{score.player}}</td>
+                            <td>{{score.player}}</td>
+                            <td>{{score.player}}</td>
+                            <td>{{score.player}}</td>
                         </tr>  
-                        <tr>
-                            <td>Player2</td>
-                            <td>77</td>
-                            <td>65</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
-                        </tr>
-                        <tr>
-                            <td>Player3</td>
-                            <td>57</td>
-                            <td>78</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
-                        </tr>
-                        <tr>
-                            <td>Player4</td>
-                            <td>26</td>
-                            <td>19</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
-                        </tr> <tr>
-                            <td>Player1</td>
-                            <td>140</td>
-                            <td>113</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
-                            </tr>
-                            <tr>
-                            <td>Player2</td>
-                            <td>77</td>
-                            <td>65</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
-                            </tr>
-                            <tr>
-                            <td>Player3</td>
-                            <td>57</td>
-                            <td>78</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
-                            </tr>
-                            <tr>
-                            <td>Player4</td>
-                            <td>26</td>
-                            <td>19</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
-                            </tr>
-                            <tr>
-                            <td>Player1</td>
-                            <td>140</td>
-                            <td>113</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
-                            </tr>
-                            <tr>
-                            <td>Player2</td>
-                            <td>77</td>
-                            <td>65</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
-                            </tr>
-                            <tr>
-                            <td>Player3</td>
-                            <td>57</td>
-                            <td>78</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
-                            </tr>
-                            <tr>
-                            <td>Player4</td>
-                            <td>26</td>
-                            <td>19</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>37.00</td>
-                            </tr>
+
                         <tr class="test">
                             <td colspan="3"></td>
                         </tr>
