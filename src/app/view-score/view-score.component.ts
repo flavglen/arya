@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Firestore,collectionData, collection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-view-score',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewScoreComponent implements OnInit {
   teamsData:any[]= [];
-  constructor() { }
+  constructor(private firestore: Firestore) { }
 
   ngOnInit(): void {
+    const collections = collection(this.firestore, 'posts');
+
+     collectionData(collections).subscribe(d=>{
+       console.log(d)
+     })
+
     const g = localStorage.getItem('score');
     if(g){
      this.teamsData =  this.generateScoreBoard(JSON.parse(g));
