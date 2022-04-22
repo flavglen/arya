@@ -1,0 +1,57 @@
+<div id="page-wrapper" style="background-image: url('../assets/images/Return_of_Sports.jpg');">
+    <div class="container white-box">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Account Settings</h4>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="white-box col-md-12">
+                <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+
+                        <label for="title">About / Privacy </label>
+                        <textarea class="form-control" type="text" placeholder="Please Enter Privacy" rows="4"
+                            formControlName="about"></textarea>
+                        <span class="fntRed"
+                            *ngIf="settingsForm.controls['about'].invalid && settingsForm.hasError('required','about') &&  settingsForm.controls['about'].touched">
+                            First name is required</span>
+                    </div>
+                    <div class="form-group">
+
+                        <label for="title">Language</label>
+                        <select class="form-control" formControlName="language">
+                            <option value="1">English</option>
+                            <option value="0">Spanish</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label for="title">Time Zone</label>
+                        <select class="form-control" formControlName="timezone">
+                            <option value="1">CST</option>
+                            <option value="2">EST</option>
+                            <option value="3">IST</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label for="title">Like Notification</label>
+                            <input type="checkbox" formControlName="notification_like" style="margin-left: 30px;" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="title">Comment Notification</label>
+                            <input type="checkbox" formControlName="notification_comment" style="margin-left: 30px;" />
+                        </div>
+                    </div>
+                    <div class="form-group" style="text-align: center; margin-top:100px;">
+                        <button class="btn btn-success" type="submit" [disabled]="!settingsForm.valid">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

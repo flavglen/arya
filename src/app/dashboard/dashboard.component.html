@@ -1,0 +1,241 @@
+<div id="page-wrapper" style="background-image: url('../assets/images/Return_of_Sports.jpg');">
+    <div class="container">
+        <div class="sportsbackground">
+            <div class="transbox" style="padding:20px;">
+                <div class="row bg-title ">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 ">
+                        <h4 class="page-title">Dashboard</h4>
+                    </div>
+
+                </div>
+                <button type="button" style="position: fixed;
+                    bottom: 33px;
+                    right: 24px;
+                    z-index: 999999;" (click)="openForm()" class="btn btn-warning btn-circle btn-xl"><i
+                        class="fa fa-plus"></i> </button>
+
+                <div class="row " *ngIf="Showform">
+                    <div class="col-md-12">
+                        <div class="">
+                            <form [formGroup]="dashboardForm" (ngSubmit)="onSubmit()">
+                                <div class="form-group ">
+                                    <div class="col-xs-12">
+                                        <label for="title">Title </label>
+                                        <input class="form-control" formControlName="title" type="text"
+                                            placeholder="Please Enter Title">
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="col-xs-12">
+                                        <label for="title">Description </label>
+                                        <textarea class="form-control" maxlength="300" formControlName="description"
+                                            rows="5" placeholder="Please Enter Description">
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="col-xs-12">
+                                        <label for="title">Location </label>
+                                        <input class="form-control" formControlName="location" type="text"
+                                            placeholder="Please Enter Location">
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <!-- <div class="col-xs-6 col-md-6">
+                                        <label for="title">Start</label>
+                                        <input class="form-control" formControlName="startdate"
+                                            placeholder="Select Start date" [owlDateTimeTrigger]="dt1"
+                                            [owlDateTime]="dt1">
+                                        <owl-date-time #dt1></owl-date-time>
+                                    </div>
+                                    <div class="col-xs-6 col-md-6">
+                                        <label for="title">End</label>
+                                        <input class="form-control" formControlName="enddate" [owlDateTimeTrigger]="dt"
+                                            placeholder="Select End date" [owlDateTime]="dt">
+                                        <owl-date-time #dt></owl-date-time>
+                                    </div> -->
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <label for="content">Content</label>
+                                        <!-- <ckeditor #editor formControlName="content" id="description" name="content">
+                                        </ckeditor> -->
+                                    </div>
+                                </div>
+
+                                <!-- <div class="form-group">
+                                    <div class="col-xs-12">
+
+                                        <ng-multiselect-dropdown [placeholder]="'custom placeholder'"
+                                            [settings]="dropdownSettings" [data]="dropdownList"
+                                            [(ngModel)]="selectedItems" >
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                </div> -->
+
+                                <div style="text-align: center;">
+                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                    <button style="margin-left: 10px;" class="btn btn-default" type="button"
+                                        (click)="resetform()">Cancel</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="!Showform">
+                    <div class="col-md-12">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="box-title">Recent Updates</h3>
+                                </div>
+                                <div class="col-md-6 popwrap" style="text-align: right;">
+                                    <button class="btn btn-facebook waves-effect btn-circle waves-light" type="button"
+                                        [ngClass]="{'filtered':isFiltered}" (click)="togglePopUp()">
+                                        <i class="fa fa-filter"></i> </button>
+                                    <!-- <div class="transparent" *ngIf="showpopup"></div> -->
+                                    <div class="popup1" *ngIf="showpopup" style="text-align: left;">
+                                        <div class="white-box">
+                                            <!-- <h3 class="box-title m-b-0" style="text-align: center;">Search</h3> -->
+                                            <button class="btn close1" type="button" (click)="togglePopUp()"><i
+                                                    class="fa fa-times"></i> </button>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputuname">User Name</label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control"
+                                                                [(ngModel)]="searchstring" id="exampleInputuname"
+                                                                placeholder="search...">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="">feed type</label>
+                                                        <div class="input-group">
+                                                            <select class="form-control" [(ngModel)]="feedtype">
+                                                                <option *ngFor="let o of options" [value]="o.value">
+                                                                    {{o.title}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="">Start</label>
+                                                        <div class="input-group">
+                                                            <!-- <input class="form-control" placeholder="Select Start date"
+                                                                [selectMode]="'range'" [(ngModel)]="from"
+                                                                [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3">
+                                                            <owl-date-time [pickerType]="'calendar'" #dt3>
+                                                            </owl-date-time> -->
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="">Sort By</label>
+                                                        <div class="input-group">
+                                                            <select class="form-control">
+                                                                <option>Post Created</option>
+                                                                <option>Start Date</option>
+                                                                <option>End Date</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" (click)="feedchange()"
+                                                        class="btn btn-success waves-effect waves-light m-r-10">Filter</button>
+                                                    <button type="button" (click)="resetfilter()"
+                                                        class="btn btn-inverse waves-effect waves-light">Reset</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-6 app-search" style="text-align: right;">
+                                    <button type="button" class="btn btn-success btn-circle" (click)="feedchange()"><i
+                                            class="fa fa-refresh"></i> </button>
+                                    <input style="margin-left:10px" type="text" [(ngModel)]="searchstring"
+                                        placeholder="Search..." class="searchpost form-control"
+                                        (change)="feedchange()" />
+                                    
+                                </div> -->
+                            </div>
+                            <div class="row ">
+                                <div class="col-md-12">
+                                    <ul class="search-listing1">
+                                        <p *ngIf="posts.length == 0"
+                                            class="btn btn-outline btn-primary btn-lg btn-block">No
+                                            Feed
+                                            Found...</p>
+                                        <li *ngFor="let post of posts; let i = index;" class="postitem ribbon-wrapper">
+                                            <div class="ribbon ribbon-bookmark ribbon-danger" *ngIf="i < 5">Soon</div>
+                                            <div class="ribbon ribbon-bookmark ribbon-success" *ngIf="i > 5 && i<10">New</div>
+                                            <div class="btn-group m-r-10 postitemoptions">
+                                                <button aria-expanded="false" data-toggle="dropdown"
+                                                    class="btn btn-default btn-outline dropdown-toggle waves-effect waves-light"
+                                                    type="button"> <i class="fa fa-ellipsis-v m-r-5"></i> </button>
+                                                <ul role="menu" class="dropdown-menu">
+                                                    <li><a href="javacript:void(0)">Intrested</a></li>
+                                                    <li><a href="javacript:void(0)">Register</a></li>
+                                                    <li><a href="javacript:void(0)">Report</a></li>
+                                                    <li><a [routerLink]="['/add-score']">Add Score</a></li>
+                                                </ul>
+                                            </div>
+
+                                            <h2><a [routerLink]="['/posts',post.Id]">{{post.Title}}</a></h2>
+                                            <h5>- <a href="#" class="username">{{post.UserName}}</a> @
+                                                {{post.CreatedDate | date :"medium"}}</h5>
+
+                                            <div class="postdetails">{{ post.Details }}<span
+                                                    *ngIf="post.Content.length == 300"><a
+                                                        [routerLink]="['/posts',post.Id]">Read
+                                                        more...</a></span></div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{post.Event_start
+                                                    | date :
+                                                    "medium"}} -
+                                                    {{post.Event_end | date : "medium"}}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <i class="fa fa-map-marker"></i>&nbsp;&nbsp;&nbsp;{{post.Location}}
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <!-- <i class="fa fa-map-marker"></i>&nbsp;&nbsp;&nbsp;{{post.Location}} -->
+                                                </div>
+                                                <div class="col-md-6" style="text-align: right;">
+
+                                                    <a [routerLink]="['/posts',post.Id]" class="action"><i
+                                                            style="padding-left:20px;font-size: 15px;"
+                                                            class="ti-comments text-info"></i></a>
+                                                    {{post.CommentsCount}}
+                                                    <a href="javacript:void(0)" class="action"
+                                                        (click)="like(post.Id,1,post.Liked)"><i
+                                                            style="padding-left:10px;font-size: 15px;"
+                                                            [ngClass]="post.Liked == 1 ? 'fa-thumbs-up' : 'fa-thumbs-o-up'"
+                                                            class="fa text-success"></i></a> {{post.LikesCount}}
+                                                    <a href="javacript:void(0)" class="action"
+                                                        (click)="like(post.Id,2,post.Liked)"><i
+                                                            style="padding-left:10px;font-size: 15px;"
+                                                            [ngClass]="post.Liked == 2 ? 'fa-thumbs-down' : 'fa-thumbs-o-down'"
+                                                            class="fa text-danger"></i></a>{{post.UnlikeCount}}
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <!-- <p *ngIf="showEnd" class="btn btn-outline btn-primary btn-lg btn-block">END</p> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- /.container-fluid -->
+        </div>
+    </div>
+</div>
+
+<!-- /#page-wrapper -->

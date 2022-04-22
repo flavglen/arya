@@ -1,0 +1,16 @@
+.icnFont{
+font-size: size 36px;
+}
+.timeline:before
+{
+    left: 1% !important;
+    background-color: #fff !important;
+}
+.timeline>li>.timeline-badge
+{
+    left: 1%;
+}
+.timeline>li>.timeline-panel
+{
+    width: 95%;
+}

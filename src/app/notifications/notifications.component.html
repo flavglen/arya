@@ -1,0 +1,84 @@
+<div id="page-wrapper">
+    <div class="container">
+        <!-- <div class="row">
+            <div class="col-md-12 text-center">
+                <a [routerLink]="['/dashboard']"> <i class="fa fa-arrow-circle-left icnFont"></i>Back to Dashboard</a>
+            </div>
+        </div> -->
+        <div class="white-box">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Notifications</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="inbox-center">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="30">
+                                        <div class="checkbox m-t-0 m-b-0 ">
+                                            <!-- <input id="checkbox0" type="checkbox" class="checkbox-toggle" value="check all">
+                                            <label for="checkbox0"></label> -->
+                                        </div>
+                                    </th>
+                                    <th colspan="2">
+                                        <div class="btn-group">
+                                            <button type="button"
+                                                class="btn btn-primary dropdown-toggle waves-effect waves-light m-r-5"
+                                                data-toggle="dropdown" aria-expanded="false"> Filter <b
+                                                    class="caret"></b> </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="javacript:void(0)" (click)="setStatus('')">All</a>
+                                                </li>
+                                                <li><a href="javacript:void(0)" (click)="setStatus('read')">Read</a>
+                                                </li>
+                                                <li><a href="javacript:void(0)" (click)="setStatus('unread')">Unread</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button type="button" (click)="getNotifications()"
+                                                class="btn btn-default waves-effect waves-light  dropdown-toggle"
+                                                data-toggle="dropdown" aria-expanded="false"> <i
+                                                    class="fa fa-refresh"></i> </button>
+                                        </div>
+                                    </th>
+                                    <th class="hidden-xs" width="100">
+                                        <div class="btn-group pull-right">
+                                            <button type="button" class="btn btn-default waves-effect"
+                                                (click)="prevpage()" [disabled]="pageNumber == 1"><i
+                                                    class="fa fa-chevron-left"></i></button>
+                                            <button type="button" class="btn btn-default waves-effect"
+                                                (click)="nextpage()" [disabled]="!nextpageenable"><i
+                                                    class="fa fa-chevron-right"></i></button>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr [class.unread]="!n.IsRead" *ngFor="let n of notifications; let i = index;">
+                                    <td>
+                                        <div class="checkbox m-t-0 m-b-0">
+                                            <input type="checkbox">
+                                            <label for="checkbox0"></label>
+                                        </div>
+                                    </td>
+                                    <td class="hidden-xs">{{n.Title}}</td>
+                                    <td class="max-texts"> <a href="javacript:void(0)"
+                                            (click)="readNotification(n)"><span
+                                                class="label label-info m-r-10">Comment</span> {{n.Content}}</a></td>
+                                    <td class="text-right"> {{n.CreatedDate | date :"MM/dd/yyyy hh:mm a"}} </td>
+                                </tr>
+                                <tr *ngIf="notifications.length == 0">
+                                    <td colspan="3" align="center">You don't have any new Notifications</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

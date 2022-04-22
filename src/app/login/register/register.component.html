@@ -1,0 +1,67 @@
+<!-- <div class="preloader">
+    <div class="cssload-speeding-wheel"></div>
+</div> -->
+<section id="wrapper" class="login-register">
+  
+    <div class="login-box">
+        <div class="white-box">
+            <form class="form-horizontal form-material" [formGroup]="registerForm" (ngSubmit) = "onSubmit()">
+                <h3 class="box-title m-b-20">Sign Up</h3>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" formControlName="userName" type="text"                        
+                        placeholder="User Name">
+                        <span  class ="fntRed" *ngIf = "registerForm.controls['userName'].invalid && registerForm.controls['userName'].touched">
+                             User Name is required</span>
+                                           
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" formControlName="email" type="text" placeholder="Email">
+                        <span class ="fntRed" *ngIf = "registerForm.hasError('required','email') && registerForm.controls['email'].touched">
+                            Email is required. </span>
+                            <span class ="fntRed" *ngIf = "!registerForm.hasError('required','email') && registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+                               Email must be valid email address</span>
+                                
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="password" formControlName = "password" placeholder="Password">
+                        <span  class ="fntRed" *ngIf = "registerForm.controls['password'].invalid && registerForm.hasError('required','password') &&  registerForm.controls['password'].touched">
+                            password is required</span>
+                            <span class="fntRed" *ngIf="!registerForm.hasError('required','password') && registerForm.controls['password'].hasError('minlength')">
+                                Your password must be at least 8 characters long.
+                            </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="password" formControlName = "confirmPassword" 
+                        placeholder="Confirm Password" (focusout) = "conformPwdValidation()">
+                        <span  class ="fntRed" *ngIf = "registerForm.controls['confirmPassword'].invalid 
+                        && registerForm.hasError('required','confirmPassword') &&  registerForm.controls['confirmPassword'].touched">
+                            confirm password is required</span>
+                            <span  class ="fntRed" *ngIf = "errPwdStatus">
+                                password should match</span> 
+                    </div>
+                </div>
+               
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"
+                         [disabled] ="!registerForm.valid" type="submit">Sign Up</button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>Already Regiesterd? 
+                            <a (click) = "onClickSignIn()" class="text-primary m-l-5"><b>Sign In</b></a></p>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</section>

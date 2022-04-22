@@ -1,0 +1,102 @@
+<div id="page-wrapper" style="background-image: url('../assets/images/Return_of_Sports.jpg');">
+    <div class="container white-box">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Profile</h4>
+            </div>
+
+        </div>
+        <div class="white-box">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" formControlName="firstname"
+                                        placeholder="Enter First Name">
+                                    <span class="fntRed"
+                                        *ngIf="profileForm.controls['firstname'].invalid && profileForm.hasError('required','firstname') &&  profileForm.controls['firstname'].touched">
+                                        First name is required</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname">Last Name</label>
+                                    <input type="text" class="form-control" id="lastname" formControlName="lastname"
+                                        placeholder="Enter Last Name">
+                                    <span class="fntRed"
+                                        *ngIf="profileForm.controls['lastname'].invalid && profileForm.hasError('required','lastname') &&  profileForm.controls['lastname'].touched">
+                                        Last name is required</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address1">Address line 1</label>
+                                    <input type="text" class="form-control" id="address1" formControlName="address1"
+                                        placeholder="Enter Address line 1">
+                                    <span class="fntRed"
+                                        *ngIf="profileForm.controls['address1'].invalid && profileForm.hasError('required','address1') &&  profileForm.controls['address1'].touched">
+                                        Address line 1 is required</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address2">Address line 2</label>
+                                    <input type="text" class="form-control" id="address2" formControlName="address2"
+                                        placeholder="Enter Address line 2">
+                                    <span class="fntRed"
+                                        *ngIf="profileForm.controls['address2'].invalid && profileForm.hasError('required','address2') &&  profileForm.controls['address2'].touched">
+                                        Address line 2 is required</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" class="form-control" id="city" formControlName="city"
+                                        placeholder="Enter City">
+                                    <span class="fntRed"
+                                        *ngIf="profileForm.controls['city'].invalid && profileForm.hasError('required','city') &&  profileForm.controls['city'].touched">
+                                        City is required</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">State</label>
+                                    <input type="text" class="form-control" id="state" formControlName="state"
+                                        placeholder="Enter State">
+                                    <span class="fntRed"
+                                        *ngIf="profileForm.controls['state'].invalid && profileForm.hasError('required','state') &&  profileForm.controls['state'].touched">
+                                        State is required</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Country">Country</label>
+                                    <select formControlName="country" class="form-control" id="country">
+                                        <option disabled>Select Country</option>
+                                        <option *ngFor="let c of Countries" [value]="c.ID">{{c.Name}}</option>
+                                    </select>
+                                    <!-- <input type="text" class="form-control" id="country" formControlName="country"
+                                        placeholder="Enter Country"> -->
+                                    <span class="fntRed"
+                                        *ngIf="profileForm.controls['country'].invalid && profileForm.hasError('required','country') &&  profileForm.controls['country'].touched">
+                                        Country is required</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="zip">zip</label>
+                                    <input type="text" class="form-control" id="zip" formControlName="zip"
+                                        placeholder="Enter Zip">
+                                    <span class="fntRed"
+                                        *ngIf="profileForm.controls['zip'].invalid && profileForm.hasError('required','zip') &&  profileForm.controls['zip'].touched">
+                                        Zip is required</span>
+                                </div>
+                                <button type="submit" [disabled]="!profileForm.valid" type="submit"
+                                    class="btn btn-success waves-effect waves-light m-r-10">Update</button>
+                                <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <!-- <ngx-dropzone (change)="onSelect($event)" [multiple]="false"
+                        accept="image/jpeg,image/jpg,image/png,image/gif" [maxFileSize]="500000">
+                        <ngx-dropzone-label>Upload Profile Image</ngx-dropzone-label>
+                        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                        </ngx-dropzone-preview>
+                    </ngx-dropzone> -->
+                </div>
+            </div>
+        </div>
+    </div>

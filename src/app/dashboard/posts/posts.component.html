@@ -1,0 +1,168 @@
+<div id="page-wrapper">
+    <div class="container">
+        <!-- <div class="row">
+            <div class="col-md-12 text-center">
+                <a [routerLink]="['/dashboard']"> <i class="fa fa-arrow-circle-left icnFont"></i>Back to Dashboard</a>
+            </div>
+        </div> -->
+        <div class="white-box" *ngIf="Showform">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <form [formGroup]="dashboardForm" (ngSubmit)="onSubmit($event.submitter.id)">
+                            <div class="form-group ">
+                                <div class="col-xs-12">
+                                    <label for="title">Title </label>
+                                    <input class="form-control" formControlName="title" type="text"
+                                        placeholder="Please Enter Title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="description">Content</label>
+                                    <!-- <ckeditor #editor formControlName="description" id="description" name="description">
+                                    </ckeditor> -->
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary" *ngIf="post.Status == 'New'" id="New"
+                                    type="submit">Save</button>
+                                <button class="btn btn-primary" style="margin-left:15px;" id="Pending"
+                                    type="submit">Save & Publish</button>
+                                <button style="margin-left: 10px;" class="btn btn-default" type="button"
+                                    (click)="resetform()">Cancel</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="white-box" *ngIf="!Showform">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h1 class="page-title"><button *ngIf="post.CanEdit" type="button" class="btn btn-success btn-circle"
+                            (click)="editPost()"><i class="fa fa-edit"></i>
+                        </button>&nbsp;&nbsp;{{post.Title}}</h1>
+                </div>
+                <div class="col-md-4">
+
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div [innerHTML]="post.Details"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div [innerHTML]="post.Content"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{post.Event_start | date : "medium"}} -
+                    {{post.Event_end | date : "medium"}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <i class="fa fa-map-marker"></i>&nbsp;&nbsp;&nbsp;{{post.Location}}
+                </div>
+                <div class="col-md-6" style="text-align: right;">
+                    <a href="javacript:void(0)" class="username">{{post.UserName}}</a> -
+                    {{post.CreatedDate | date :"medium" }}
+                    <a href="javacript:void(0)" (click)="toggleComments()" class="action"><i
+                            style="padding-left:20px;font-size: 15px;" class="ti-comments text-info"></i></a>
+                    {{post.CommentsCount}}
+                    <a href="javacript:void(0)" class="action" (click)="toggleLikes()">Likes</a>
+                    <a href="javacript:void(0)" class="action" (click)="like(post.Id,1,post.Liked)"><i
+                            style="padding-left:10px;font-size: 15px;"
+                            [ngClass]="post.Liked == 1 ? 'fa-thumbs-up' : 'fa-thumbs-o-up'"
+                            class="fa text-success"></i></a>
+                    {{post.LikesCount}}
+                    <a href="javacript:void(0)" class="action" (click)="like(post.Id,2,post.Liked)"><i
+                            style="padding-left:10px;font-size: 15px;"
+                            [ngClass]="post.Liked == 2 ? 'fa-thumbs-down' : 'fa-thumbs-o-down'"
+                            class="fa text-danger"></i></a>{{post.UnlikeCount}}
+                </div>
+            </div>
+            <div class="row" *ngIf="showLikes">
+                <div class="row">
+                    <div class="col-md-12">
+                        Likes
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <ul style="list-style-type: none;">
+                            <li class="timeline-inverted" *ngFor="let l of likes; let i = index;">
+                                <i style="padding-left:10px;font-size: 15px;"
+                                    [ngClass]="l.Like == 1 ? 'fa-thumbs-up text-success' : 'fa-thumbs-down text-danger'"
+                                    class="fa "></i>
+                                {{l.UserName}} -- {{l.CreatedDate | date :"medium"}}
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="showComments">
+                <div class="row">
+                    <div class="col-md-12">
+                        Comments
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <textarea class="form-control" rows="5" [(ngModel)]="comment"></textarea>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="margin-top: 30px;" type="button" class="btn btn-success btn-circle"
+                            (click)="saveComment()"><i class="fa fa-save"></i> </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <ul class="timeline">
+                                <li class="timeline-inverted" *ngFor="let comment of comments; let i = index;">
+                                    <div class=" timeline-badge success">
+                                        <img class="img-responsive" alt="user"
+                                            src="https://localhost:44303/Login/GetPicture?id={{comment.CommentedBy}}">
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">{{comment.CommentedByName}}
+                                                -{{comment.CommentedDate | date : "MM/dd/yyyy hh:mm a"}}</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>{{comment.CommentText}}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row" *ngFor="let comment of comments; let i = index;">
+                    <div class="col-md-3">
+                        {{comment.Id}}
+                        <br>
+                        {{comment.CommentedDate | date :"medium"}}
+                    </div>
+                    <div class="col-md-9">
+                        {{comment.CommentText}}
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
