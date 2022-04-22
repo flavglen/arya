@@ -18,21 +18,21 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { HomeLayoutComponent } from './layout/home-layout/home-layout.component';
 import { LoginLayoutComponent } from './layout/login-layout/login-layout.component';
 import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
-import { PostsComponent } from './dashboard/posts/posts.component';
+import { PostsComponent } from './components/posts/posts.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
-import { AddScoreComponent } from './dashboard/add-score/add-score.component';
+import { AddScoreComponent } from './components/add-score/add-score.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomHttpHandler } from './services/http.Interceptor';
-import { AuthService } from './auth/auth.service';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './components/auth/auth.service';
+import { AuthGuard } from './components/auth/auth.guard';
 import { PostsService } from './services/posts.service';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { AuthComponent } from './auth/auth.component';
+import { AuthComponent } from './components/auth/auth.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 const firebaseConfig = {

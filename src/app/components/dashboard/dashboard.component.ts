@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PostsService } from '../services/posts.service';
+import { PostsService } from '../../services/posts.service';
 import { map } from 'rxjs/operators';
-import { post, sports } from '../models/post';
+import { post, sports } from '../../models/post';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../services/data.service';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
 
 @Component({
