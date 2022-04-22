@@ -1,0 +1,63 @@
+<div class="row postWrapper">
+    <div class="col-md-12">
+        <div class="">
+            <form [formGroup]="dashboardForm" (ngSubmit)="onSubmit()">
+                <div class="field">
+                    <label for="sportType" class="block">Sports Type</label>
+                    <p-dropdown [options]="cities" formControlName="sportsType" optionLabel="name"></p-dropdown>
+                </div>
+                <div class="field">
+                    <label for="Title" class="block">Title</label>
+                    <input  class="p-inputtext-lg" formControlName="title" id="Title" type="text" pInputText> 
+                </div>
+                <div class="field">
+                    <label for="description" class="block">Description</label>
+                    <textarea id="float-input" rows="5" cols="30" formControlName="description"  pInputTextarea></textarea>
+                </div>
+                <div class="field">
+                    <label for="location" class="block">Location</label>
+                    <input  class="p-inputtext-lg" formControlName="location" id="location" type="text" pInputText> 
+                </div>
+                <div class="form-group ">
+                    <!-- <div class="col-xs-6 col-md-6">
+                        <label for="title">Start</label>
+                        <input class="form-control" formControlName="startdate"
+                            placeholder="Select Start date" [owlDateTimeTrigger]="dt1"
+                            [owlDateTime]="dt1">
+                        <owl-date-time #dt1></owl-date-time>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <label for="title">End</label>
+                        <input class="form-control" formControlName="enddate" [owlDateTimeTrigger]="dt"
+                            placeholder="Select End date" [owlDateTime]="dt">
+                        <owl-date-time #dt></owl-date-time>
+                    </div> -->
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <label for="content">Content</label>
+                        <!-- <ckeditor #editor formControlName="content" id="description" name="content">
+                        </ckeditor> -->
+                    </div>
+                </div>
+
+                <!-- <div class="form-group">
+                    <div class="col-xs-12">
+
+                        <ng-multiselect-dropdown [placeholder]="'custom placeholder'"
+                            [settings]="dropdownSettings" [data]="dropdownList"
+                            [(ngModel)]="selectedItems" >
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div> -->
+
+                <div style="text-align: center;">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button style="margin-left: 10px;" class="btn btn-default" type="button"
+                        (click)="resetform()">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
