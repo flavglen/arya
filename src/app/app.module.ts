@@ -30,6 +30,19 @@ import { CustomHttpHandler } from './http.Interceptor';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
 import { PostsService } from './services/posts.service';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AuthComponent } from './auth/auth.component';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBDe-9lZXrO4XcBEXInTaIlwjZESNkEOXI",
+  authDomain: "sportzmine-1363a.firebaseapp.com",
+  projectId: "sportzmine-1363a",
+  storageBucket: "sportzmine-1363a.appspot.com",
+  messagingSenderId: "157794750630",
+  appId: "1:157794750630:web:56e99be508a7d5b081a467"
+};
 
 @NgModule({
   declarations: [
@@ -47,7 +60,8 @@ import { PostsService } from './services/posts.service';
     NotificationsComponent,
     ProfileComponent,
     AccountSettingsComponent,
-    AddScoreComponent
+    AddScoreComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -59,11 +73,14 @@ import { PostsService } from './services/posts.service';
     DynamicFormsMaterialUIModule,
     DynamicFormsPrimeNGUIModule,
     MatGridListModule,
-    HttpClientModule
-    
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [AuthService, AuthGuard, PostsService,DatePipe,
-    { provide: HTTP_INTERCEPTORS, useClass: CustomHttpHandler, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: CustomHttpHandler, multi: true },
+    { provide: FIREBASE_OPTIONS, useValue: firebaseConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

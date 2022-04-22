@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ActiveMatchesComponent } from './active-matches/active-matches.component';
+import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AddScoreComponent } from './dashboard/add-score/add-score.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -48,6 +49,10 @@ const routes: Routes = [
         {
           path:'active-match',
           component:ActiveMatchesComponent
+        },
+        {
+          path:'auth',
+          component:AuthComponent
         },
   { path: '**', redirectTo: '' }
 ];
