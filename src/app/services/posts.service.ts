@@ -90,7 +90,7 @@ export class PostsService {
     //this.toastr.success(message, title);
   }
   showError(message: any, title: any) {
-    console.log(message);
+    alert('login  failed');
    // this.toastr.error(message, title);
   }
   showWarn(message: any, title: any) {

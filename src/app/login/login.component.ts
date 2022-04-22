@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { PostsService } from '../services/posts.service';
 import { CommonService } from '../services/common.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   invalidLogin: boolean = false
 
   constructor(private authService: AuthService, private frmBuilder: FormBuilder, private router: Router,
-    private pstService: PostsService, private commonService: CommonService) { }
+    private pstService: PostsService, private commonService: CommonService,public auth: AngularFireAuth) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -43,23 +44,9 @@ export class LoginComponent implements OnInit {
     //  localStorage.setItem('userName',this.loginForm.value.userName)
     /* End -- get Logged In User Name */
 
-    this.pstService.usrLogin(loginDetails).subscribe(res => {
-      
-      if (res.success == true) {
-        window.localStorage.setItem('token', res.data.token);
-        localStorage.setItem('userName', res.data.userInfo.UserName);
-        if (res.data.userInfo.UserDetail.length > 0)
-          localStorage.setItem('picture', res.data.userInfo.UserDetail[0].Picture);
-        else
-          localStorage.setItem('picture', "");
-        this.pstService.showSuccess(res.message, "Success")
-        this.router.navigate(['dashboard']).then(() => {
-          window.location.reload();
-        });
-      }
-      else {
-        this.invalidLogin = true;
-        this.pstService.showWarn(res.message, "Error")
+    this.auth.signInWithEmailAndPassword(loginDetails.userName,loginDetails.password).then(res => {
+      if (res ) {
+        this.router.navigateByUrl('/');
       }
     },
       error => {
