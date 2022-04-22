@@ -1,6 +1,6 @@
 {
-  "name": "arya",
-  "version": "0.0.0",
+  "name": "SportzMine",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

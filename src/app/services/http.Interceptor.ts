@@ -11,11 +11,11 @@ import {
 
 
 import { Router } from "@angular/router";
-import { environment } from "../environments/environment";
+import { environment } from "../../environments/environment";
 import { Observable } from "rxjs";
 import { catchError, finalize, map, tap } from 'rxjs/operators';
-import { DataService } from "./services/data.service";
-import { PostsService } from "./services/posts.service";
+import { DataService } from "./data.service";
+import { PostsService } from "./posts.service";
 
 
 

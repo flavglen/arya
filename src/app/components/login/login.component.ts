@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { PostsService } from '../services/posts.service';
-import { CommonService } from '../services/common.service';
+import { AuthService } from '../../services/auth.service';
+import { PostsService } from '../../services/posts.service';
+import { CommonService } from '../../services/common.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({

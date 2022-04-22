@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Country, profile } from '../models/profile';
-import { DataService } from '../services/data.service';
-import { PostsService } from '../services/posts.service';
-import { ProfileService } from '../services/profile.service';
+import { Country, profile } from '../../models/profile';
+import { DataService } from '../../services/data.service';
+import { PostsService } from '../../services/posts.service';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-profile',

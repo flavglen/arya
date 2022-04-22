@@ -5,28 +5,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatchComponent } from './match/match.component';
+import { MatchComponent } from './components/match/match.component';
 import {MatSelectModule} from '@angular/material/select';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { DynamicFormsPrimeNGUIModule } from '@ng-dynamic-forms/ui-primeng';
-import { UpdateScoreComponent } from './update-score/update-score.component';
-import { ViewScoreComponent } from './view-score/view-score.component';
-import { ActiveMatchesComponent } from './active-matches/active-matches.component';
+import { UpdateScoreComponent } from './components/update-score/update-score.component';
+import { ViewScoreComponent } from './components/view-score/view-score.component';
+import { ActiveMatchesComponent } from './components/active-matches/active-matches.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CommonModule, DatePipe } from '@angular/common';
 import { HomeLayoutComponent } from './layout/home-layout/home-layout.component';
 import { LoginLayoutComponent } from './layout/login-layout/login-layout.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { RegisterComponent } from './login/register/register.component';
+import { RegisterComponent } from './components/register/register.component';
 import { PostsComponent } from './dashboard/posts/posts.component';
-import { NotificationsComponent } from './notifications/notifications.component';
-import { ProfileComponent } from './profile/profile.component';
-import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { AddScoreComponent } from './dashboard/add-score/add-score.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CustomHttpHandler } from './http.Interceptor';
+import { CustomHttpHandler } from './services/http.Interceptor';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
 import { PostsService } from './services/posts.service';
@@ -36,13 +36,23 @@ import { AuthComponent } from './auth/auth.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBDe-9lZXrO4XcBEXInTaIlwjZESNkEOXI",
-  authDomain: "sportzmine-1363a.firebaseapp.com",
-  projectId: "sportzmine-1363a",
-  storageBucket: "sportzmine-1363a.appspot.com",
-  messagingSenderId: "157794750630",
-  appId: "1:157794750630:web:56e99be508a7d5b081a467"
+  apiKey: "AIzaSyB2aTvlHJSRSCcV-bcQlEiLGILauleVnm8",
+  authDomain: "arya-e181e.firebaseapp.com",
+  projectId: "arya-e181e",
+  storageBucket: "arya-e181e.appspot.com",
+  messagingSenderId: "784939880194",
+  appId: "1:784939880194:web:efe204d56f1ae9c1d73c1b"
 };
+
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBDe-9lZXrO4XcBEXInTaIlwjZESNkEOXI",
+//   authDomain: "sportzmine-1363a.firebaseapp.com",
+//   projectId: "sportzmine-1363a",
+//   storageBucket: "sportzmine-1363a.appspot.com",
+//   messagingSenderId: "157794750630",
+//   appId: "1:157794750630:web:56e99be508a7d5b081a467"
+// };
 
 @NgModule({
   declarations: [

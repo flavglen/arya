@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserSettings } from '../models/profile';
-import { PostsService } from '../services/posts.service';
-import { ProfileService } from '../services/profile.service';
+import { UserSettings } from '../../models/profile';
+import { PostsService } from '../../services/posts.service';
+import { ProfileService } from '../../services/profile.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
