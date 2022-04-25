@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Firestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostsService } from 'src/app/services/posts.service';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-add-post',
@@ -8,17 +10,20 @@ import { PostsService } from 'src/app/services/posts.service';
   styleUrls: ['./add-post.component.scss']
 })
 export class AddPostComponent implements OnInit {
-  cities=[{name:'Cricket',code:'cricket',id:1}];
+  private itemsCollection: AngularFirestoreCollection<any>;
+  cities = [{ name: 'Select', code: 'select', id: 0 },{ name: 'Cricket', code: 'cricket', id: 1 }];
   dashboardForm = new FormGroup({
     'sportsType': new FormControl(null, [Validators.required]),
     'title': new FormControl(null, [Validators.required]),
     'description': new FormControl(null, [Validators.required]),
-    'content': new FormControl(null, [Validators.required]),
+    'content': new FormControl(null, []),
     'startdate': new FormControl(null, [Validators.required]),
     'enddate': new FormControl(null, [Validators.required]),
     'location': new FormControl(null, [Validators.required]),
   });
-  constructor(private postservice: PostsService) { }
+  constructor(private postservice: PostsService,private readonly afs: AngularFirestore) { 
+    this.itemsCollection = afs.collection<any>('posts');
+  }
 
   ngOnInit(): void {
   }
@@ -27,33 +32,17 @@ export class AddPostComponent implements OnInit {
       this.postservice.showWarn("Please Fill Details", "");
       return;
     }
-    const descDetails = {
-      sportsType:this.dashboardForm.value.sportsType,
-      description: this.dashboardForm.value.description,
-      Content: this.dashboardForm.value.content,
-      Title: this.dashboardForm.value.title,
-      Details: this.dashboardForm.value.description,
-      Event_start: this.dashboardForm.value.startdate,
-      Event_end: this.dashboardForm.value.enddate,
-      Location: this.dashboardForm.value.location
-    }
 
-    this.postservice.createNewPost(descDetails).subscribe((res: any) => {
-        if (res.success) {
-          this.dashboardForm.reset();
-          this.postservice.showSuccess("Post Created Successfully", "");
-        }
-        else
-          this.postservice.showError("Please contact Admin", "Error");
-      },
-        (err) => {
-          console.log("Some Thing wrong");
-        }
-      );
+    const id = this.afs.createId();
+    const item: any = { id, ...this.dashboardForm.value };
+    this.itemsCollection.doc(id).set(item).then(re=>{
+      this.dashboardForm.reset();
+      alert('success');
+    }).catch(er=> {
+      alert('error');
+    });
   }
-
   resetform() {
     this.dashboardForm.reset();
   }
-
 }

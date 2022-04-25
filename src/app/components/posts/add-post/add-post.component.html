@@ -18,39 +18,15 @@
                     <label for="location" class="block">Location</label>
                     <input  class="p-inputtext-lg" formControlName="location" id="location" type="text" pInputText> 
                 </div>
-                <div class="form-group ">
-                    <!-- <div class="col-xs-6 col-md-6">
-                        <label for="title">Start</label>
-                        <input class="form-control" formControlName="startdate"
-                            placeholder="Select Start date" [owlDateTimeTrigger]="dt1"
-                            [owlDateTime]="dt1">
-                        <owl-date-time #dt1></owl-date-time>
-                    </div>
-                    <div class="col-xs-6 col-md-6">
-                        <label for="title">End</label>
-                        <input class="form-control" formControlName="enddate" [owlDateTimeTrigger]="dt"
-                            placeholder="Select End date" [owlDateTime]="dt">
-                        <owl-date-time #dt></owl-date-time>
-                    </div> -->
+                <div class="field">
+                    <label for="location" class="block">Start Time : </label>
+                    <p-calendar formControlName="startdate" [showTime]="true" [hourFormat]="'12'"></p-calendar> 
                 </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <label for="content">Content</label>
-                        <!-- <ckeditor #editor formControlName="content" id="description" name="content">
-                        </ckeditor> -->
-                    </div>
+                <div class="field">
+                    <label for="location" class="block">End Time :</label>
+                    <p-calendar formControlName="enddate" [showTime]="true" [hourFormat]="'12'"></p-calendar>
                 </div>
-
-                <!-- <div class="form-group">
-                    <div class="col-xs-12">
-
-                        <ng-multiselect-dropdown [placeholder]="'custom placeholder'"
-                            [settings]="dropdownSettings" [data]="dropdownList"
-                            [(ngModel)]="selectedItems" >
-                        </ng-multiselect-dropdown>
-                    </div>
-                </div> -->
-
+                
                 <div style="text-align: center;">
                     <button class="btn btn-primary" type="submit">Submit</button>
                     <button style="margin-left: 10px;" class="btn btn-default" type="button"
