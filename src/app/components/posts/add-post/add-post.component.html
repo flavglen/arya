@@ -1,0 +1,39 @@
+<div class="row postWrapper">
+    <div class="col-md-12">
+        <div class="">
+            <form [formGroup]="dashboardForm" (ngSubmit)="onSubmit()">
+                <div class="field">
+                    <label for="sportType" class="block">Sports Type</label>
+                    <p-dropdown [options]="cities" formControlName="sportsType" optionLabel="name"></p-dropdown>
+                </div>
+                <div class="field">
+                    <label for="Title" class="block">Title</label>
+                    <input  class="p-inputtext-lg" formControlName="title" id="Title" type="text" pInputText> 
+                </div>
+                <div class="field">
+                    <label for="description" class="block">Description</label>
+                    <textarea id="float-input" rows="5" cols="30" formControlName="description"  pInputTextarea></textarea>
+                </div>
+                <div class="field">
+                    <label for="location" class="block">Location</label>
+                    <input  class="p-inputtext-lg" formControlName="location" id="location" type="text" pInputText> 
+                </div>
+                <div class="field">
+                    <label for="location" class="block">Start Time : </label>
+                    <p-calendar formControlName="startdate" [showTime]="true" [hourFormat]="'12'"></p-calendar> 
+                </div>
+                <div class="field">
+                    <label for="location" class="block">End Time :</label>
+                    <p-calendar formControlName="enddate" [showTime]="true" [hourFormat]="'12'"></p-calendar>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button style="margin-left: 10px;" class="btn btn-default" type="button"
+                        (click)="resetform()">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
