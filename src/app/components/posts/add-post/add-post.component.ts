@@ -40,10 +40,10 @@ export class AddPostComponent implements OnInit {
       alert('sometnhign  went wrong');
       return;
     }
-    const userdata = JSON.parse(user);
-    console.log(userdata);
+    const userData = JSON.parse(user);
+    console.log(userData);
     const id = this.afs.createId();
-    const item: any = { id, ...this.dashboardForm.value };
+    const item: any = { id, ...this.dashboardForm.value, userData };
     this.itemsCollection.doc(id).set(item).then(re=>{
       this.dashboardForm.reset();
       alert('success');
@@ -51,6 +51,7 @@ export class AddPostComponent implements OnInit {
       alert('error');
     });
   }
+  
   resetform() {
     this.dashboardForm.reset();
   }
