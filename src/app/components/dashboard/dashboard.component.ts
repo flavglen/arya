@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardForm = new FormGroup({
       'title': new FormControl(null, [Validators.required]),
       'description': new FormControl(null, [Validators.required]),
-      'content': new FormControl(null, [Validators.required]),
+      'content': new FormControl(null, []),
       'startdate': new FormControl(null, [Validators.required]),
       'enddate': new FormControl(null, [Validators.required]),
       'location': new FormControl(null, [Validators.required]),
@@ -70,37 +70,6 @@ export class DashboardComponent implements OnInit {
     this.Showform = true;
   }
 
-  onSubmit() {
-    if (!this.dashboardForm.valid) {
-      this.postservice.showWarn("Please Fill Details", "");
-      return;
-    }
-    const descDetails = {
-      description: this.dashboardForm.value.description,
-      Content: this.dashboardForm.value.content,
-      Title: this.dashboardForm.value.title,
-      Details: this.dashboardForm.value.description,
-      Event_start: this.dashboardForm.value.startdate,
-      Event_end: this.dashboardForm.value.enddate,
-      Location: this.dashboardForm.value.location
-    }
-
-    this.postservice.createNewPost(descDetails).subscribe((res: any) => {
-      if (res.success) {
-        this.getPosts();
-        this.Showform = false;
-        this.dashboardForm.reset();
-        this.postservice.showSuccess("Post Created Successfully", "");
-      }
-      else
-        this.postservice.showError("Please contact Admin", "Error");
-    },
-      (err) => {
-        console.log("Some Thing wrong");
-      }
-    );
-
-  }
   feedchange() {
     this.posts = [];
     this.pageNumber = 1;
@@ -179,10 +148,7 @@ export class DashboardComponent implements OnInit {
     );
     console.log(this.posts);
   }
-  resetform() {
-    this.Showform = false;
-    this.dashboardForm.reset();
-  }
+
   onScroll() {
     if (this.enableScroling) {
       this.pageNumber += 1;

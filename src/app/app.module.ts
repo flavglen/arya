@@ -34,6 +34,12 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AuthComponent } from './components/auth/auth.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { AddPostComponent } from './components/posts/add-post/add-post.component';
+import {InputTextModule} from 'primeng/inputtext';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import { DropdownModule } from 'primeng/dropdown';
+import {CalendarModule} from 'primeng/calendar';
+import {EditorModule} from 'primeng/editor';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB2aTvlHJSRSCcV-bcQlEiLGILauleVnm8",
@@ -71,7 +77,8 @@ const firebaseConfig = {
     ProfileComponent,
     AccountSettingsComponent,
     AddScoreComponent,
-    AuthComponent
+    AuthComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +93,11 @@ const firebaseConfig = {
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    InputTextModule,
+    InputTextareaModule,
+    DropdownModule,
+    CalendarModule,
+    EditorModule
   ],
   providers: [AuthService, AuthGuard, PostsService,DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpHandler, multi: true },

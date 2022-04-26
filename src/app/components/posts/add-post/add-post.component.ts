@@ -32,7 +32,10 @@ export class AddPostComponent implements OnInit {
       this.postservice.showWarn("Please Fill Details", "");
       return;
     }
-
+    // move to service
+    const user  = sessionStorage.getItem('user') || '';
+    const userdata = JSON.parse(user);
+    console.log(userdata);
     const id = this.afs.createId();
     const item: any = { id, ...this.dashboardForm.value };
     this.itemsCollection.doc(id).set(item).then(re=>{

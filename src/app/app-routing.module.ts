@@ -16,12 +16,13 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { ProfileComponent } from './components/profile/profile.component';
 import { UpdateScoreComponent } from './components/update-score/update-score.component';
 import { ViewScoreComponent } from './components/view-score/view-score.component';
+import { AddPostComponent } from './components/posts/add-post/add-post.component';
 
 
 const routes: Routes = [
 
   {
-    path: '', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [   // canActivate: [AuthGuard],
+    path: '', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [
       { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       { path: 'posts/:id', component: PostsComponent, canActivate: [AuthGuard] },
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'accountsettings', component: AccountSettingsComponent, canActivate: [AuthGuard] },
       { path:'add-score', component: AddScoreComponent, canActivate: [AuthGuard] },
+      { path:'add-post', component: AddPostComponent, canActivate: [AuthGuard] },
     ]
   },
   { path: 'login', component: LoginComponent },

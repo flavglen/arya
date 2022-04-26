@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, Form } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,24 +12,34 @@ import { PostsService } from 'src/app/services/posts.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
+  registerForm: FormGroup =new FormGroup({
+    userName: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl(null, [Validators.required,Validators.minLength(8)]),
+    confirmPassword: new FormControl(null, [Validators.required])
+  });
+
   submitted = false;
   errPwdStatus:boolean = false;
-  errPwdMessage:string;
-  constructor(private authService: AuthService, private frmBuilder: FormBuilder, private router: Router,
-    private pstService: PostsService) { }
+  errPwdMessage:string='';
+  private userCollection: AngularFirestoreCollection<any>;
+  
+  constructor(
+    private authService: AuthService, 
+    private frmBuilder: FormBuilder, 
+    private router: Router,
+    private pstService: PostsService,
+    private auth: AngularFireAuth,
+    private readonly afs: AngularFirestore
+    ) { 
+      this.userCollection = afs.collection<any>('users');
+    }
 
 
   ngOnInit(): void {
-    this.registerForm = new FormGroup({
-      userName: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required,Validators.minLength(8)]),
-      confirmPassword: new FormControl(null, [Validators.required])
-    });
-    
   }
-    get email() { 
+
+  get email() { 
     return this.registerForm.get('email');   
   }
 
@@ -52,31 +64,32 @@ export class RegisterComponent implements OnInit {
     if(this.errPwdStatus){
       return;
     }
-    const userDetails = {
-      Username: this.registerForm.value.userName,
-      Email: this.registerForm.value.email,
-      Password: this.registerForm.value.password
-    }
-    this.pstService.usrRegister(userDetails).subscribe(res => {
-      if (res.success == true) {
-        this.pstService.showSuccess(res.message, "Success");
-        this.pstService.showSuccess("Please login with your Credentials", "Success");
-        this.router.navigate(['/']).then(() => {
-          window.location.reload();
-        });
-      }
-      else {
-        this.pstService.showWarn(res.message, "Error");
-      }
-    },
-      error => {
-        this.pstService.showError("Please ReCheck", "Error")
-      });
+    const userDetails = this.registerForm.value;
+
+    //firebase register
+    this.auth.createUserWithEmailAndPassword(userDetails.email,userDetails.password).then(userData=>{
+      //registered in firebase store data in custom collection
+      this.addUserToCustomCollection(userData.user?.uid);
+    }).catch((e)=>{
+      alert('unable to register user- firebase')
+    });
   }
 
   onClickSignIn(){
     this.router.navigate(['login']).then(() => {
       window.location.reload();
+    });
+  }
+
+  addUserToCustomCollection(uId?:string){
+    const id = uId;
+    const {email,userName} = this.registerForm.value;
+    const user: any = { id, email, userName, uId };
+    this.userCollection.doc(id).set(user).then(re=>{
+      this.registerForm.reset();
+      alert('user has been added');
+    }).catch(er=> {
+      alert('failed to save user data');
     });
   }
 

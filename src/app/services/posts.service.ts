@@ -39,8 +39,6 @@ export class PostsService {
   }
 
   public getPostData(searchstring: string, pagesize: number, pagenumber: number, from: any, feedtype: number): Observable<any> {
-    //pageNumber=1&pageSize=2&search=ssss&from=01%2F01%2F2022&to=03%2F03%2F2022'
-    debugger;
     this.querystring = "pageNumber=" + pagenumber;
     this.querystring += "&pageSize=" + pagesize;
     this.querystring += searchstring.length > 0 ? "&search=" + searchstring : "";
