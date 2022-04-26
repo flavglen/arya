@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { PostsService } from '../../services/posts.service';
 import { CommonService } from '../../services/common.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +18,14 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   invalidLogin: boolean = false
 
-  constructor(private authService: AuthService, private frmBuilder: FormBuilder, private router: Router,
-    private pstService: PostsService, private commonService: CommonService,public auth: AngularFireAuth) { }
+  constructor(
+    private authService: AuthService, 
+    private frmBuilder: FormBuilder, 
+    private router: Router,
+    private pstService: PostsService, 
+    private commonService: CommonService,
+    private auth: AngularFireAuth,
+    private afs: AngularFirestore) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -39,13 +46,14 @@ export class LoginComponent implements OnInit {
       userName: this.loginForm.value.userName,
       password: this.loginForm.value.password
     }
-    /* Start -- get Logged In User Name */
-    // this.commonService.editUserName(this.loginForm.value.userName); -- Beh Sub
-    //  localStorage.setItem('userName',this.loginForm.value.userName)
-    /* End -- get Logged In User Name */
 
     this.auth.signInWithEmailAndPassword(loginDetails.userName,loginDetails.password).then(res => {
       if (res ) {
+        const user = this.afs.doc<any>('users/'+res.user?.uid);
+        user.valueChanges().subscribe(cUser=>{
+          sessionStorage.setItem('customUser',JSON.stringify(cUser));
+        })
+        sessionStorage.setItem('user',JSON.stringify(res));
         this.router.navigateByUrl('/');
       }
     },
@@ -54,6 +62,10 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  getCustomUserData(){
+    // this.postCollection = this.afs.collection<any>('users');
+    // this.postCollection.snapshotChanges()
+  }
   onClickSignUp() {
     this.router.navigate(['register']).then(() => {
       window.location.reload();

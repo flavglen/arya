@@ -82,7 +82,7 @@ export class RegisterComponent implements OnInit {
   }
 
   addUserToCustomCollection(uId?:string){
-    const id = this.afs.createId();
+    const id = uId;
     const {email,userName} = this.registerForm.value;
     const user: any = { id, email, userName, uId };
     this.userCollection.doc(id).set(user).then(re=>{
