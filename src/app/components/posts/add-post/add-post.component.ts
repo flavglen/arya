@@ -33,7 +33,13 @@ export class AddPostComponent implements OnInit {
       return;
     }
     // move to service
-    const user  = sessionStorage.getItem('user') || '';
+    const user  = sessionStorage.getItem('customUser') || null;
+
+    if(!user)
+    {
+      alert('sometnhign  went wrong');
+      return;
+    }
     const userdata = JSON.parse(user);
     console.log(userdata);
     const id = this.afs.createId();
