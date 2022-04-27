@@ -51,8 +51,9 @@ export class LoginComponent implements OnInit {
       if (res ) {
         const user = this.afs.doc<any>('users/'+res.user?.uid);
         user.valueChanges().subscribe(cUser=>{
+          console.log(cUser);
           sessionStorage.setItem('customUser',JSON.stringify(cUser));
-        })
+        });
         sessionStorage.setItem('user',JSON.stringify(res));
         this.router.navigateByUrl('/');
       }
