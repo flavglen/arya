@@ -33,11 +33,17 @@ export class AddPostComponent implements OnInit {
       return;
     }
     // move to service
-    const user  = sessionStorage.getItem('user') || '';
-    const userdata = JSON.parse(user);
-    console.log(userdata);
+    const user  = sessionStorage.getItem('customUser') || null;
+
+    if(!user)
+    {
+      alert('sometnhign  went wrong');
+      return;
+    }
+    const userData = JSON.parse(user);
+    console.log(userData);
     const id = this.afs.createId();
-    const item: any = { id, ...this.dashboardForm.value };
+    const item: any = { id, ...this.dashboardForm.value, userData };
     this.itemsCollection.doc(id).set(item).then(re=>{
       this.dashboardForm.reset();
       alert('success');
@@ -45,6 +51,7 @@ export class AddPostComponent implements OnInit {
       alert('error');
     });
   }
+  
   resetform() {
     this.dashboardForm.reset();
   }

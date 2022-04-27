@@ -40,6 +40,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {EditorModule} from 'primeng/editor';
+import {MenuModule} from 'primeng/menu';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyB2aTvlHJSRSCcV-bcQlEiLGILauleVnm8",
@@ -97,7 +99,8 @@ const firebaseConfig = {
     InputTextareaModule,
     DropdownModule,
     CalendarModule,
-    EditorModule
+    EditorModule,
+    MenuModule
   ],
   providers: [AuthService, AuthGuard, PostsService,DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpHandler, multi: true },
