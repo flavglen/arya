@@ -15,7 +15,7 @@ export class PostsComponent implements OnInit {
   postId: number = 0;
   comment: string = '';
   comments: postComments[] = [];
-  likes:postLikes[]  = [];
+  likes: postLikes[] = [];
   showComments: boolean = false;
   showLikes: boolean = false;
   enableScroling: boolean = true;
@@ -26,9 +26,23 @@ export class PostsComponent implements OnInit {
 
   //new 
   private postCollection: AngularFirestoreCollection<any> | undefined;
-  posts: any[]= [];
+  posts: any[] = [];
+  items = [
+    {
+      label: 'Interested',
+      icon: 'pi pi-external-link',
+    },
+    {
+      label: 'Edit',
+      icon: 'pi pi-external-link',
+    },
+    {
+      label: 'Start Match',
+      icon: 'pi pi-external-link',
+    }
+  ];
 
-  constructor(private activatedRoute: ActivatedRoute, private postService: PostsService,private readonly afs: AngularFirestore) { }
+  constructor(private activatedRoute: ActivatedRoute, private postService: PostsService, private readonly afs: AngularFirestore) { }
 
   ngOnInit(): void {
     this.postId = this.activatedRoute.snapshot.params['id'];
@@ -45,13 +59,13 @@ export class PostsComponent implements OnInit {
         data.enddate = data.enddate.toDate();
         const id = a.payload.doc.id;
         return { id, ...data };
-      }))).subscribe(posts=>{
+      }))).subscribe(posts => {
         this.posts = posts;
         console.log(posts);
       });
   }
 
-  editPost(){
+  editPost() {
 
   }
 
@@ -66,14 +80,14 @@ export class PostsComponent implements OnInit {
   // }
 
   // like(postID: any, status: any, liked: number) {
-  
+
   // }
   // toggleComments() {
-  
+
   // }
   // toggleLikes()
   // {
-   
+
   // }
   // getPicture(id: number) {
   // }

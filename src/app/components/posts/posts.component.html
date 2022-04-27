@@ -2,8 +2,8 @@
     <div class="container">
         <ng-container *ngIf="posts.length;else noPosts">
             <div class="white-box" *ngFor="let post of posts"> 
-                <div class="row bg-title">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="row bg-titled">
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
                         <h1 class="page-title">
                             <button *ngIf="false" type="button" class="btn btn-success btn-circle"
                                 (click)="editPost()"><i class="fa fa-edit"></i>
@@ -17,6 +17,10 @@
                                <span>Added By: <b>{{post?.userData?.userName}}</b></span>
                            </div>
                         </div>
+                    </div>
+                    <div class="col-lg-1 text-right" style="position:relative">
+                        <i (click)="menu.toggle($event)" class="pi pi-list"></i>
+                        <p-menu #menu [popup]="true" [model]="items"></p-menu>
                     </div>
                 </div>
                 <div class="row">
@@ -44,3 +48,5 @@
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+
+
