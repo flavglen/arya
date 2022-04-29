@@ -1,0 +1,45 @@
+     <nav class="navbar navbar-default navbar-static-top m-b-0">
+        <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)"
+                data-toggle="collapse" data-target=".navbar-collapse"></a>
+            <div class="top-left-part"><a class="logo" href="index.html"><b>
+                        <img src="../assets/images/logo_new.png" style="max-height: 50px;" alt="home" /></b>
+            </a></div>
+            <ul class="nav navbar-top-links navbar-left hidden-xs" style="width: calc(100% - 388px);
+            text-align: center; display: flex; justify-content: center;">
+
+                <ng-container>
+                    <li *ngFor="let s of Sportslist;let i = index;">
+                        <img class="sports_icons"
+                            src="../assets/images/sportsicons/{{s.logo}}" />
+                    </li>
+                </ng-container>
+            </ul>
+            <ul class="nav navbar-top-links navbar-right pull-right">
+                <li>
+                    <p-overlayPanel #op>
+                        <ng-template pTemplate>
+                            <ul>
+                                <li>  Notification 1 </li>
+                                <li>  Notification 2 </li>
+                                <li>  Notification 3 </li>
+                            </ul>
+                        </ng-template>
+                    </p-overlayPanel>
+                    <i class="pi pi-bell mr-4 p-text-secondary" (click)="op.toggle($event)" pBadge style="font-size: 2rem" value="2"></i>
+                </li>
+
+                <li>
+                    <p-overlayPanel #op1>
+                        <ng-template pTemplate>
+                            <ul  style="display: flex;flex-direction: column;">
+                                <li><a href="#" [routerLink]="['/profile']"><i class="ti-user"></i> My Profile</a></li>
+                                <li><a href="#" [routerLink]="['/accountsettings']"><i class="ti-settings"></i> Account Setting</a></li>
+                                <li><a (click)="onLogOut()"><i class="fa fa-power-off"></i> Logout</a></li>
+                            </ul>
+                        </ng-template>
+                    </p-overlayPanel>
+                    <i class="pi pi-calendar mr-4 p-text-secondary" (click)="op1.toggle($event)" pBadge style="font-size: 2rem" [value]="'10+'" severity="danger"></i>
+                </li>      
+            </ul>
+        </div>
+    </nav>

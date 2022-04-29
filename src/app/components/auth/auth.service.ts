@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../../models/user';
@@ -13,7 +14,8 @@ export class AuthService {
   // }
 
   constructor(
-    private router: Router
+    private router: Router,
+    public auth: AngularFireAuth
   ) {
     console.log("hello - Auth Service");
   }
@@ -33,7 +35,9 @@ export class AuthService {
   }
 
   logout() {
-    this.loggedIn.next(false);
+    this.auth.signOut();
+    sessionStorage.removeItem('customUser');
+    sessionStorage.removeItem('user');
     this.router.navigate(['login']);
   }
 }
