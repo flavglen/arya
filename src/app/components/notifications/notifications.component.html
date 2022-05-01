@@ -1,5 +1,4 @@
-<div id="page-wrapper">
-    <div class="container">
+    <div class="container" *ngIf="!isNavbar">
         <!-- <div class="row">
             <div class="col-md-12 text-center">
                 <a [routerLink]="['/dashboard']"> <i class="fa fa-arrow-circle-left icnFont"></i>Back to Dashboard</a>
@@ -81,4 +80,9 @@
             </div>
         </div>
     </div>
-</div>
+    <div *ngIf="isNavbar">
+        <ul>
+            <li *ngFor="let notification of notifications"> {{notification}}</li>
+        
+        </ul>
+    </div>

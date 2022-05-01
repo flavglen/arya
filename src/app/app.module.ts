@@ -41,7 +41,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {EditorModule} from 'primeng/editor';
 import {MenuModule} from 'primeng/menu';
-
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {BadgeModule} from 'primeng/badge';
+import { NavbarComponent } from './layout/navbar/navbar.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB2aTvlHJSRSCcV-bcQlEiLGILauleVnm8",
@@ -80,7 +82,8 @@ const firebaseConfig = {
     AccountSettingsComponent,
     AddScoreComponent,
     AuthComponent,
-    AddPostComponent
+    AddPostComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,9 @@ const firebaseConfig = {
     DropdownModule,
     CalendarModule,
     EditorModule,
-    MenuModule
+    MenuModule,
+    OverlayPanelModule,
+    BadgeModule
   ],
   providers: [AuthService, AuthGuard, PostsService,DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpHandler, multi: true },

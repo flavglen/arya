@@ -16,9 +16,10 @@ export class AuthComponent implements OnInit {
   }
 
   register(e:any){
-   this.auth.createUserWithEmailAndPassword(this.user,this.pass).then(d=>{
+    this.auth.signOut()
+    this.auth.createUserWithEmailAndPassword(this.user,this.pass).then(d=>{
      console.log(d);
-   })
+   });
   }
 
 }

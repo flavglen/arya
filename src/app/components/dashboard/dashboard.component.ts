@@ -34,7 +34,18 @@ export class DashboardComponent implements OnInit {
   selectedItems = [];
   dropdownSettings: IDropdownSettings | undefined;
   sportsList: sports[] = [];
-  isFiltered:boolean = false;
+  isFiltered:boolean = false;  
+  Sportslist = [
+    { "name": "cricket", "logo": "cricket.png" },
+    { "name": "football", "logo": "football.png" },
+    { "name": "table tennis", "logo": "tt.png" },
+    { "name": "tennis", "logo": "tennis.png" },
+    { "name": "golf", "logo": "golf.png" },
+    { "name": "basketball", "logo": "basketball.png" },
+    { "name": "volleyball", "logo": "volleyball.png" },
+    { "name": "bowling", "logo": "bowling.png" },
+    { "name": "baseball", "logo": "baseball.png" },
+  ];
   constructor(private postservice: PostsService, private data: DataService) { }
 
   ngOnInit(): void {
