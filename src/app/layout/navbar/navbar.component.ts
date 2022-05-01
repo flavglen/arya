@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -19,15 +22,29 @@ export class NavbarComponent implements OnInit {
   ];
   profilepic: any;
   loggedInUser:any;
-
-  constructor() { }
+  unreadNotifications= 0;
+  notificationCollection = this.afs.collection<any>('notifications', ref => ref.where('isViewed', '==', false));
+  constructor(private auth: AngularFireAuth,private readonly afs: AngularFirestore) { }
 
   ngOnInit(): void {
+    const user = sessionStorage.getItem('customUser');
+    this.loggedInUser  = user ? JSON.parse(user) : null;
+
+    this.notificationCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))).subscribe((data)=>{
+        this.unreadNotifications = data.length;
+      })
   }
 
   onLogOut() {
-    localStorage.removeItem('token');
-    localStorage.clear();
+    this.auth.signOut();
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('customUser');
+
   }
 
 }

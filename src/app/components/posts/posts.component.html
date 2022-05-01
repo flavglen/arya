@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="col-lg-1 text-right" style="position:relative">
-                        <i (click)="menu.toggle($event)" class="pi pi-list"></i>
+                        <i (click)="menu.toggle($event);currentPost=post" class="pi pi-list"></i>
                         <p-menu #menu [popup]="true" [model]="items"></p-menu>
                     </div>
                 </div>

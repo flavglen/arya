@@ -16,16 +16,13 @@
             </ul>
             <ul class="nav navbar-top-links navbar-right pull-right">
                 <li>
+                    <span>Logged in as <strong>{{loggedInUser.userName}}</strong></span> &nbsp;
                     <p-overlayPanel #op>
                         <ng-template pTemplate>
-                            <ul>
-                                <li>  Notification 1 </li>
-                                <li>  Notification 2 </li>
-                                <li>  Notification 3 </li>
-                            </ul>
+                            <app-notifications></app-notifications>
                         </ng-template>
                     </p-overlayPanel>
-                    <i class="pi pi-bell mr-4 p-text-secondary" (click)="op.toggle($event)" pBadge style="font-size: 2rem" value="2"></i>
+                    <i class="pi pi-bell mr-4 p-text-secondary" (click)="op.toggle($event)" pBadge style="font-size: 2rem" value="{{unreadNotifications}}"></i>
                 </li>
 
                 <li>
@@ -38,7 +35,7 @@
                             </ul>
                         </ng-template>
                     </p-overlayPanel>
-                    <i class="pi pi-calendar mr-4 p-text-secondary" (click)="op1.toggle($event)" pBadge style="font-size: 2rem" [value]="'10+'" severity="danger"></i>
+                    <i class="pi pi-user mr-4 p-text-secondary" (click)="op1.toggle($event)" pBadge style="font-size: 2rem" severity="danger"></i>
                 </li>      
             </ul>
         </div>

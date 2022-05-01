@@ -23,14 +23,20 @@ export class PostsComponent implements OnInit {
   pageSize: number = 5;
   Showform: boolean = false;
   dashboardForm: FormGroup = new FormGroup({});
+  currentPost:any;
 
   //new 
   private postCollection: AngularFirestoreCollection<any> | undefined;
+  private notificationCollection: AngularFirestoreCollection<any>;
+
   posts: any[] = [];
   items = [
     {
       label: 'Interested',
       icon: 'pi pi-external-link',
+      command: () => {
+        this.setIntested()
+      }
     },
     {
       label: 'Edit',
@@ -42,7 +48,9 @@ export class PostsComponent implements OnInit {
     }
   ];
 
-  constructor(private activatedRoute: ActivatedRoute, private postService: PostsService, private readonly afs: AngularFirestore) { }
+  constructor(private activatedRoute: ActivatedRoute, private postService: PostsService, private readonly afs: AngularFirestore) { 
+    this.notificationCollection = this.afs.collection<any>('notifications');
+  }
 
   ngOnInit(): void {
     this.postId = this.activatedRoute.snapshot.params['id'];
@@ -67,6 +75,23 @@ export class PostsComponent implements OnInit {
 
   editPost() {
 
+  }
+
+  setIntested(){
+    if(!this.currentPost) return;
+    const id = this.afs.createId();
+    const notificationPayload = {
+      id,
+      user: this.currentPost.userData,
+      post: {id:this.currentPost.id,title:this.currentPost.title},
+      isViewed: false,
+      date:new Date(),
+    }
+    this.notificationCollection.doc(id).set(notificationPayload).then(res=>{
+      alert('Notified the host');
+    }).catch(e=>{
+      alert('Failed to save data');
+    });
   }
 
   // getComments() {
