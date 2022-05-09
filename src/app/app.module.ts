@@ -44,6 +44,7 @@ import {MenuModule} from 'primeng/menu';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {BadgeModule} from 'primeng/badge';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { CricketAdminComponent } from './components/cricket-admin/cricket-admin.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB2aTvlHJSRSCcV-bcQlEiLGILauleVnm8",
@@ -83,7 +84,8 @@ const firebaseConfig = {
     AddScoreComponent,
     AuthComponent,
     AddPostComponent,
-    NavbarComponent
+    NavbarComponent,
+    CricketAdminComponent
   ],
   imports: [
     BrowserModule,
