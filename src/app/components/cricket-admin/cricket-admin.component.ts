@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { OverSummary, Score } from './over.model';
 
@@ -73,13 +74,15 @@ export class CricketAdminComponent implements OnInit {
 ];
 ballType = 5;
 bowlingTeamActive:any[]=[];
-
+private itemsCollection: AngularFirestoreCollection<any>;
 cricketForm:FormGroup;
 
   get overs() {
     return this.cricketForm.get('oversModel') as FormArray;
   }
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private readonly afs: AngularFirestore) {
+    this.itemsCollection = afs.collection<any>('cricketOvers');
+   }
 
   ngOnInit(): void {
     this.createOverModel();
@@ -106,8 +109,8 @@ cricketForm:FormGroup;
     this.createOverModel();
     //store score
     console.log( this.cricketForm.value)
-    this.createScoreModel();
-
+    // saves score
+    this.saveScore();
     //new over
     this.currentOver  +=1;
     this.cricketForm.controls['currentOver'].patchValue(this.currentOver);
@@ -118,7 +121,7 @@ cricketForm:FormGroup;
   
     overSummary.postId = '111';
     overSummary.matchId = '4444';
-    
+    const obj:any = { };
    const overModel =  this.cricketForm.controls['oversModel'].value.map((sc:any, i:number)=>{
       const overKey  =  this.overModel[i].toString();
       // set
@@ -129,11 +132,23 @@ cricketForm:FormGroup;
       score.extraType =  this.cricketForm.controls['ballType'].value === 5 ? null : this.cricketForm.controls['ballType'].value;
       score.extraRun = this.cricketForm.controls['extraRuns'].value
       // push
+      obj[overKey] = score
       return {[overKey]: score};
     });
 
-    overSummary.overs = overModel;
-    console.log(overSummary);
+    overSummary.overs.push(obj);
+    return overSummary;
+  }
+
+  saveScore(){
+    const scoreModel = this.createScoreModel();
+    console.log(scoreModel)
+    // const id = this.afs.createId();
+    // this.itemsCollection.doc(id).set( JSON.parse(JSON.stringify(scoreModel))).then(re=>{
+    //   alert('success');
+    // }).catch(er=> {
+    //   alert('error');
+    // });
   }
 
 }
