@@ -45,6 +45,9 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {BadgeModule} from 'primeng/badge';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { CricketAdminComponent } from './components/cricket-admin/cricket-admin.component';
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {PickListModule} from 'primeng/picklist';
+import {FieldsetModule} from 'primeng/fieldset';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB2aTvlHJSRSCcV-bcQlEiLGILauleVnm8",
@@ -107,7 +110,10 @@ const firebaseConfig = {
     EditorModule,
     MenuModule,
     OverlayPanelModule,
-    BadgeModule
+    BadgeModule,
+    SelectButtonModule,
+    PickListModule,
+    FieldsetModule
   ],
   providers: [AuthService, AuthGuard, PostsService,DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpHandler, multi: true },

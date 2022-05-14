@@ -1,20 +1,54 @@
 <div class="container">
+    <h3 class="text-center">Cricket</h3>
     <div class="row">
         <!--col1-->
-        <div class="col-sm-7">
-            <div class="row">
-                <input id="disabled-input" type="text" pInputText [disabled]="true" />
+        <div class="col-sm-6">
+            <div class="row form-group">
+                <input id="disabled-input" type="text" [(ngModel)]="currentOver" pInputText [disabled]="true" />
             </div>
-            <div class="row">
-                <input id="disabled-input" class="col-sm-2" type="text" pInputText />
-                <input id="disabled-input" class="col-sm-2" type="text" pInputText />
-                <input id="disabled-input" class="col-sm-2" type="text" pInputText />
-                <input id="disabled-input" class="col-sm-2" type="text" pInputText />
+            <div class="row form-group">
+                <p-selectButton [options]="justifyOptions"  [(ngModel)]="ballType" optionLabel="name" optionValue="value"></p-selectButton>
             </div>
+
+            <div class="row form-group" *ngIf="ballType!==5">
+                <input id="disabled-input" class="col-sm-4" type="text" pInputText />
+            </div>
+
+            <div class="row form-group">
+                <input *ngFor="let b of overModel" id="disabled-input" class="col-sm-1" type="text"
+                    [(ngModel)]="score[b]" pInputText placeholder="{{b}}" />
+            </div>
+
+            <div class="row form-group">
+              <button> ENd Of Over </button>
+            </div>
+
+
         </div>
-          <!--col2-->
-        <div class="col-sm-5">
-            <input id="disabled-input" type="text" pInputText [disabled]="true" />
+        <!--col2-->
+        <div class="col-sm-6">
+            <div class="col-sm-12">
+                <p-fieldset legend="Batsman">
+                    <p-pickList [source]="battingTeam" [target]="battingTeamPlaying" [dragdrop]="true" [responsive]="true">
+                        <ng-template let-player pTemplate="item">
+                            <div>
+                                <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{player.name}}</div>
+                            </div>
+                        </ng-template>
+                    </p-pickList>
+                </p-fieldset>
+            </div>
+            <div class="col-sm-12">
+                <p-fieldset legend="Bowler">
+                    <p-pickList [source]="bowlingTeam" [target]="bowlingTeamActive" [dragdrop]="true" [responsive]="true">
+                        <ng-template let-player pTemplate="item">
+                            <div>
+                                <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{player.name}}</div>
+                            </div>
+                        </ng-template>
+                    </p-pickList>
+                </p-fieldset>
+            </div>
         </div>
     </div>
 </div>
