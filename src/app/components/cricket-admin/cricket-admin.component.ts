@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { OverSummary, Score } from './over.model';
 
 @Component({
   selector: 'app-cricket-admin',
@@ -6,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cricket-admin.component.scss']
 })
 export class CricketAdminComponent implements OnInit {
-  currentOver = 1;
+  currentOver = 0;
   score:any = {};
   overModel:any=[] = [];
   bowlingTeam = [{
@@ -71,14 +73,67 @@ export class CricketAdminComponent implements OnInit {
 ];
 ballType = 5;
 bowlingTeamActive:any[]=[];
-  constructor() { }
+
+cricketForm:FormGroup;
+
+  get overs() {
+    return this.cricketForm.get('oversModel') as FormArray;
+  }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.createOverModel();
+    
+    this.cricketForm = this.fb.group({
+      currentOver: [0],
+      ballType: [5],
+      extraRuns:[0],
+      oversModel: this.fb.array(this.createFormArray())
+    });
+  }
+
+  createFormArray(){
+    return this.overModel.map((x:any) => {
+       return this.fb.control('');
+    });
   }
 
   createOverModel(){
-    this.overModel = Array.from({length: 8 }, (_,i) => Math.round(1 + i) / 10);
+    this.overModel = Array.from({length: 9 }, (_,i) => (this.currentOver  + (i+1) / 10));
+  }
+
+  startNewOver(){
+    this.createOverModel();
+    //store score
+    console.log( this.cricketForm.value)
+    this.createScoreModel();
+
+    //new over
+    this.currentOver  +=1;
+    this.cricketForm.controls['currentOver'].patchValue(this.currentOver);
+  }
+
+  createScoreModel(){
+    const overSummary = new OverSummary();
+  
+    overSummary.postId = '111';
+    overSummary.matchId = '4444';
+    
+   const overModel =  this.cricketForm.controls['oversModel'].value.map((sc:any, i:number)=>{
+      const overKey  =  this.overModel[i].toString();
+      // set
+      const score = new Score();
+      score.batsman = this.battingTeamPlaying[0] //0 is striker always
+      score.bowler = this.bowlingTeamActive[0]
+      score.score =  sc;
+      score.extraType =  this.cricketForm.controls['ballType'].value === 5 ? null : this.cricketForm.controls['ballType'].value;
+      score.extraRun = this.cricketForm.controls['extraRuns'].value
+      // push
+      return {[overKey]: score};
+    });
+
+    overSummary.overs = overModel;
+    console.log(overSummary);
   }
 
 }

@@ -2,25 +2,25 @@
     <h3 class="text-center">Cricket</h3>
     <div class="row">
         <!--col1-->
-        <div class="col-sm-6">
+        <div class="col-sm-6" [formGroup]="cricketForm">
             <div class="row form-group">
-                <input id="disabled-input" type="text" [(ngModel)]="currentOver" pInputText [disabled]="true" />
+                <input id="disabled-input" type="text"  formControlName="currentOver" pInputText [disabled]="true" />
             </div>
             <div class="row form-group">
-                <p-selectButton [options]="justifyOptions"  [(ngModel)]="ballType" optionLabel="name" optionValue="value"></p-selectButton>
+                <p-selectButton [options]="justifyOptions"  formControlName="ballType"  optionLabel="name" optionValue="value"></p-selectButton>
             </div>
 
             <div class="row form-group" *ngIf="ballType!==5">
-                <input id="disabled-input" class="col-sm-4" type="text" pInputText />
+                <input id="disabled-input" class="col-sm-4" type="text"  formControlName="extraRuns"  pInputText />
+            </div>
+
+            <div class="row form-group"  formArrayName="oversModel">
+                <input  *ngFor="let over of overs.controls; let i=index"  id="disabled-input" class="col-sm-1" type="text"
+                [formControlName]="i"  pInputText  placeholder="{{overModel[i]}}" />
             </div>
 
             <div class="row form-group">
-                <input *ngFor="let b of overModel" id="disabled-input" class="col-sm-1" type="text"
-                    [(ngModel)]="score[b]" pInputText placeholder="{{b}}" />
-            </div>
-
-            <div class="row form-group">
-              <button> ENd Of Over </button>
+              <button (click)="startNewOver()"> ENd Of Over </button>
             </div>
 
 
