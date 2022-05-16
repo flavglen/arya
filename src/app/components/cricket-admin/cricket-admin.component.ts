@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { map } from 'rxjs/operators';
+import { battingTeam, bowlingTeam } from 'src/assets/mockplayers';
 import { OverSummary, Score } from './over.model';
 
 @Component({
@@ -9,70 +11,23 @@ import { OverSummary, Score } from './over.model';
   styleUrls: ['./cricket-admin.component.scss']
 })
 export class CricketAdminComponent implements OnInit {
+  matchCollectionId =  localStorage.getItem('matchId') || '';
   currentOver = 0;
   score:any = {};
   overModel:any=[] = [];
-  bowlingTeam = [{
-      "id": "6",
-      "code": "Bowler1",
-      "name": "Bowler1"
-    },
-    {
-      "id": "7",
-      "code": "Bowler2",
-      "name": "Bowler2"
-    },
-    {
-      "id": "8",
-      "code": "Bowler3",
-      "name": "Bowler3"
-    },
-    {
-      "id": "9",
-      "code": "Bowler4",
-      "name": "Bowler4"
-    },
-    {
-      "id": "10",
-      "code": "Bowler5",
-      "name": "Bowler5"
-    }
-];
-  battingTeam: any[] = [{
-      "id": "1",
-      "code": "Player1",
-      "name": "Player1"
-    },
-    {
-      "id": "2",
-      "code": "Player2",
-      "name": "Player2"
-    },
-    {
-      "id": "3",
-      "code": "Player3",
-      "name": "Player3"
-    },
-    {
-      "id": "4",
-      "code": "Player4",
-      "name": "Player4"
-    },
-    {
-      "id": "5",
-      "code": "Player5",
-      "name": "Player5"
-    }
-];
+  bowlingTeam = bowlingTeam;
+  battingTeam = battingTeam;
+
   battingTeamPlaying: any[] = [];
   justifyOptions = [
     {name: 'Wide', value: 1},
     {name: 'No Ball', value: 2},
     {name: 'Byes', value: 3},
     {name: 'LB', value: 4},
-    {name: 'NORMAL', value: 5}
+    {name: 'NORMAL', value: 5},
+    {name: 'WICKET', value: 6}
 ];
-ballType = 5;
+
 bowlingTeamActive:any[]=[];
 private itemsCollection: AngularFirestoreCollection<any>;
 cricketForm:FormGroup;
@@ -80,6 +35,12 @@ cricketForm:FormGroup;
   get overs() {
     return this.cricketForm.get('oversModel') as FormArray;
   }
+
+  get ballType() {
+    return this.cricketForm.get('ballType')?.value
+  }
+  
+
   constructor(private fb: FormBuilder, private readonly afs: AngularFirestore) {
     this.itemsCollection = afs.collection<any>('cricketOvers');
    }
@@ -89,7 +50,7 @@ cricketForm:FormGroup;
     
     this.cricketForm = this.fb.group({
       currentOver: [0],
-      ballType: [5],
+      ballType: [5], // default normal=5
       extraRuns:[0],
       oversModel: this.fb.array(this.createFormArray())
     });
@@ -142,13 +103,30 @@ cricketForm:FormGroup;
 
   saveScore(){
     const scoreModel = this.createScoreModel();
-    console.log(scoreModel)
-    // const id = this.afs.createId();
-    // this.itemsCollection.doc(id).set( JSON.parse(JSON.stringify(scoreModel))).then(re=>{
-    //   alert('success');
-    // }).catch(er=> {
-    //   alert('error');
-    // });
+
+    if(this.matchCollectionId === '') {
+      this.matchCollectionId = this.afs.createId();
+      localStorage.setItem('matchId',this.matchCollectionId);
+      this.itemsCollection.doc(this.matchCollectionId).set( JSON.parse(JSON.stringify(scoreModel))).then(re=>{
+        alert('success');
+      }).catch(er=> {
+        alert('error');
+      });
+    } else {
+
+      this.itemsCollection.doc(this.matchCollectionId).get().subscribe(cx=>{
+        const overs = cx.data().overs;
+        overs.push(JSON.parse(JSON.stringify(scoreModel.overs[0])));
+
+
+        this.itemsCollection.doc(this.matchCollectionId).set({overs}).then(re=>{
+          alert('success');
+        }).catch(er=> {
+          alert('error');
+        });
+
+      });
+    }
   }
 
 }

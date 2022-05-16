@@ -1,7 +1,7 @@
- <div class="col-md-6 wc-table-wrapper" *ngFor="let team of teamsData">
+ <div class="col-md-6 wc-table-wrapper">
         <div class="table-section">
             <div>
-                <div class="table-title">{{team.SelectTeam}}</div>
+                <div class="table-title">TEAM BATTING</div>
                     <table class="wc-table">
                         <thead>
                         <tr class="head">
@@ -10,18 +10,20 @@
                         <tr class="head">
                             <th>Player</th>
                             <th>Runs</th>
+                            <th>B</th>
                             <th>6's</th>
                             <th>4's</th>
                             <th>S/R rate</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let score of team.myFormArray;let i=index">
-                            <td>{{score['Player'+ (i+1)]}}</td>
-                            <td>{{score.six * score.four}}</td>
-                            <td>{{score.six}}</td>
-                            <td>{{score.four}}</td>
-                            <td>114%</td>
+                        <tr *ngFor="let team of teamsData;let i=index">
+                            <td>{{team.name}}</td>
+                            <td>{{this.scoreSummary[team.name] ? this.scoreSummary[team.name].runs :'-'}}</td>
+                            <td>{{this.scoreSummary[team.name] ? this.scoreSummary[team.name].ballsFaced:'-'}}</td>
+                            <td>{{this.scoreSummary[team.name] ? this.scoreSummary[team.name].four:'-'}}</td>
+                            <td>{{this.scoreSummary[team.name] ? this.scoreSummary[team.name].six:'-'}}</td>
+                            <td>{{this.scoreSummary[team.name] ? this.scoreSummary[team.name].sr : '-'}}</td>
                         </tr>  
 
                         <tr class="test">
@@ -33,21 +35,12 @@
                         <tr class="head">
                             <td colspan="3">Over 50</td>
                         </tr>
-                        <tr>
-                            <td>bowler1</td>
-                            <td>3-47</td>
-                            <td>10</td>
+                        <tr  *ngFor="let k of objectKeys(scoreSummaryBowler)">
+                            <td>{{scoreSummaryBowler[k].name}}</td>
+                            <td>{{scoreSummaryBowler[k].wickets}} - {{scoreSummaryBowler[k].runs}}</td>
+                            <td>2</td>
                         </tr>
-                        <tr>
-                            <td>bowler2</td>
-                            <td>1-71</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td>bowler3</td>
-                            <td>1-84</td>
-                            <td>9</td>
-                        </tr>
+      
                         </tbody>
                     </table>
                 </div>

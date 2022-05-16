@@ -33,7 +33,11 @@ const routes: Routes = [
       { path:'add-score', component: AddScoreComponent, canActivate: [AuthGuard] },
       { path:'add-post', component: AddPostComponent, canActivate: [AuthGuard] },
       { path:'update-cricket', component: CricketAdminComponent, canActivate: [AuthGuard] },
-      
+      {
+        path:'view-score',
+        component:ViewScoreComponent,
+        canActivate: [AuthGuard] 
+      },
     ]
   },
   { path: 'login', component: LoginComponent },
@@ -47,10 +51,7 @@ const routes: Routes = [
           path:'update-score',
           component:UpdateScoreComponent
         },
-        {
-          path:'view-score',
-          component:ViewScoreComponent
-        },
+
         {
           path:'active-match',
           component:ActiveMatchesComponent
