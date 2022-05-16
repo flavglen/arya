@@ -1,0 +1,54 @@
+<div class="container">
+    <h3 class="text-center">Cricket</h3>
+    <div class="row">
+        <!--col1-->
+        <div class="col-sm-6" [formGroup]="cricketForm">
+            <div class="row form-group">
+                <input id="disabled-input" type="text"  formControlName="currentOver" pInputText [disabled]="true" />
+            </div>
+            <div class="row form-group">
+                <p-selectButton [options]="justifyOptions"  formControlName="ballType"  optionLabel="name" optionValue="value"></p-selectButton>
+            </div>
+
+            <div class="row form-group" *ngIf="ballType!==5">
+                <input id="disabled-input" class="col-sm-4" type="text"  formControlName="extraRuns"  pInputText />
+            </div>
+
+            <div class="row form-group"  formArrayName="oversModel">
+                <input  *ngFor="let over of overs.controls; let i=index"  id="disabled-input" class="col-sm-1" type="text"
+                [formControlName]="i"  pInputText  placeholder="{{overModel[i]}}" />
+            </div>
+
+            <div class="row form-group">
+              <button (click)="startNewOver()"> ENd Of Over </button>
+            </div>
+
+
+        </div>
+        <!--col2-->
+        <div class="col-sm-6">
+            <div class="col-sm-12">
+                <p-fieldset legend="Batsman">
+                    <p-pickList [source]="battingTeam" [target]="battingTeamPlaying" [dragdrop]="true" [responsive]="true">
+                        <ng-template let-player pTemplate="item">
+                            <div>
+                                <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{player.name}}</div>
+                            </div>
+                        </ng-template>
+                    </p-pickList>
+                </p-fieldset>
+            </div>
+            <div class="col-sm-12">
+                <p-fieldset legend="Bowler">
+                    <p-pickList [source]="bowlingTeam" [target]="bowlingTeamActive" [dragdrop]="true" [responsive]="true">
+                        <ng-template let-player pTemplate="item">
+                            <div>
+                                <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{player.name}}</div>
+                            </div>
+                        </ng-template>
+                    </p-pickList>
+                </p-fieldset>
+            </div>
+        </div>
+    </div>
+</div>

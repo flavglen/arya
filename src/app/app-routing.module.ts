@@ -17,6 +17,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UpdateScoreComponent } from './components/update-score/update-score.component';
 import { ViewScoreComponent } from './components/view-score/view-score.component';
 import { AddPostComponent } from './components/posts/add-post/add-post.component';
+import { CricketAdminComponent } from './components/cricket-admin/cricket-admin.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,12 @@ const routes: Routes = [
       { path: 'accountsettings', component: AccountSettingsComponent, canActivate: [AuthGuard] },
       { path:'add-score', component: AddScoreComponent, canActivate: [AuthGuard] },
       { path:'add-post', component: AddPostComponent, canActivate: [AuthGuard] },
+      { path:'update-cricket', component: CricketAdminComponent, canActivate: [AuthGuard] },
+      {
+        path:'view-score',
+        component:ViewScoreComponent,
+        canActivate: [AuthGuard] 
+      },
     ]
   },
   { path: 'login', component: LoginComponent },
@@ -44,10 +51,7 @@ const routes: Routes = [
           path:'update-score',
           component:UpdateScoreComponent
         },
-        {
-          path:'view-score',
-          component:ViewScoreComponent
-        },
+
         {
           path:'active-match',
           component:ActiveMatchesComponent
